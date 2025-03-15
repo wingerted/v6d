@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MACOSX_DEPLOYMENT_TARGET: "10.15"
+  MACOSX_DEPLOYMENT_TARGET: "13.1"
 
 jobs:
   build-vineyardd:
@@ -33,7 +33,7 @@ jobs:
     if: ${{ github.repository == 'v6d-io/v6d' || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
-        os: [macos-11]
+        os: [macos-13]
 
     steps:
       - uses: actions/checkout@v3
