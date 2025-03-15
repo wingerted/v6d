@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MACOSX_DEPLOYMENT_TARGET: "13.1"
+  MACOSX_DEPLOYMENT_TARGET: "13.7"
 
 jobs:
   build-vineyardd:
@@ -189,7 +189,7 @@ jobs:
           body: "vineyard ${{ steps.tag.outputs.TAG }}"
 
       - name: Upload CI artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vineyardd.${{ runner.os }}-generic.${{ github.sha }}.tar.gz
           path: vineyardd.${{ runner.os }}-generic.${{ github.sha }}.tar.gz
@@ -199,7 +199,7 @@ jobs:
     if: ${{ github.repository == 'v6d-io/v6d' || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
-        os: [macos-11]
+        os: [macos-13]
         platform: [x86_64, aarch64]
 
     steps:
@@ -259,7 +259,7 @@ jobs:
 
       - name: Upload CI artifacts
         if: ${{ matrix.platform == 'x86_64' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vineyardctl.${{ runner.os }}-generic.${{ github.sha }}.tar.gz
           path: vineyardctl.${{ runner.os }}-generic.${{ github.sha }}.tar.gz
@@ -270,7 +270,7 @@ jobs:
     if: ${{ github.repository == 'v6d-io/v6d' || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
-        os: [macos-11]
+        os: [macos-13]
         python: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
@@ -471,7 +471,7 @@ jobs:
           overwrite: true
           body: "vineyard ${{ steps.tag.outputs.TAG }}"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ github.event_name == 'workflow_dispatch' }}
         with:
           name: vineyard-macosx-wheels-${{ matrix.python }}
